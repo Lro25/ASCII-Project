@@ -20,13 +20,17 @@ for i in range(size[1]):
 		pixels[i].append(im.getpixel((k,i)))
 
 
-# for i in range(size[1]):
-#         for k in range(size[0]):
-#                 pixels[i][k] = int((pixels[i][k][0] + pixels[i][k][1] + pixels[i][k][2])/3)
+for i in range(size[1]):
+        for k in range(size[0]):
+                pixels[i][k] = round((pixels[i][k][0] + pixels[i][k][1] + pixels[i][k][2])/3)
 
 for i in range(size[1]):
         for k in range(size[0]):
                 pixels[i][k] = round((.21 * pixels[i][k][0]) + (.72 * pixels[i][k][1]) + (.07 * pixels[i][k][2]))
+
+for i in range(size[1]):
+        for k in range(size[0]):
+                pixels[i][k] = round((max(pixels[i][k]) + min(pixels[i][k])) / 2)
 
 
 asc = '`^\\",:;Il!i~+_-?][}{1)(|\\\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$'
