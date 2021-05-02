@@ -2,6 +2,7 @@ from PIL import Image
 
 asc = '`^\\",:;Il!i~+_-?][}{1)(|\\\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$'
 
+# Resizes Image Based on Factor Parameter
 def resize_image(im_pre, FACT):	
 	return im_pre.resize((im_pre.size[0]//FACT,im_pre.size[1]//FACT))
 
@@ -12,7 +13,7 @@ def get_size(im):
 def pic_size():
 	print('Pixel Matrix Size: ' + str(size))
 
-
+# Returns Matrix of Pixel RGB Values
 def pixel_matrix(im, size):
 	pixels = []
 	for i in range(size[1]):
@@ -21,7 +22,7 @@ def pixel_matrix(im, size):
 			pixels[i].append(im.getpixel((k,i)))
 	return pixels
 
-
+# Return Matrix of Brightness Values
 def brightness_matrix(size, b, matrix):
 	pixels = matrix
 	if b == 'a':
@@ -38,6 +39,7 @@ def brightness_matrix(size, b, matrix):
 		                pixels[i][k] = round((max(pixels[i][k]) + min(pixels[i][k])) / 2)
 	return pixels	                
 
+# Returns Matrix of ASCII Characters
 def text_matrix(size, sym_repeat_fact, matrix):
 	pixels = matrix
 	for i in range(size[1]):
@@ -45,10 +47,12 @@ def text_matrix(size, sym_repeat_fact, matrix):
 	                pixels[i][k] = asc[round((pixels[i][k] * 64) / 255)] * sym_repeat_fact
 	return pixels
 
+# Prints Joined Matrix of ASCII Characters to the Console
 def print_text_console(size, pixels):
 	for i in range(size[1]):
 		print(''.join(pixels[i]))
 
+# Prints Joined Matrix of ASCII Characters to a .txt File
 def print_text_file(size, matrix):
 	pixels = matrix
 	file1 = open(r"..\..\image.txt", "a")
@@ -57,7 +61,7 @@ def print_text_file(size, matrix):
 	file1.close()
 
 
-
+# Program to be Run if Not Imported
 def auto_program():
 	im_pre = Image.open("../../image2.jpeg")
 	resize_factor = int(input('Input Resize Factor: '))
