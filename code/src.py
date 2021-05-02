@@ -45,9 +45,18 @@ def text_matrix(size, sym_repeat_fact, matrix):
 	                pixels[i][k] = asc[round((pixels[i][k] * 64) / 255)] * sym_repeat_fact
 	return pixels
 
-def print_text_pic(size, pixels):
+def print_text_console(size, pixels):
 	for i in range(size[1]):
 		print(''.join(pixels[i]))
+
+def print_text_file(size, matrix):
+	pixels = matrix
+	file1 = open(r"..\..\image.txt", "a")
+	for i in range(size[1]):
+		file1.write(''.join(pixels[i]) + '\n')
+	file1.close()
+
+
 
 def auto_program():
 	im_pre = Image.open("../../image2.jpeg")
@@ -55,7 +64,11 @@ def auto_program():
 	text_repeat_factor = int(input('Input Number of Times for Character to Repeat: '))
 	im = resize_image(im_pre, resize_factor)
 	print(im.size)
-	print_text_pic(im.size,text_matrix(im.size, text_repeat_factor, brightness_matrix(im.size, 'l', pixel_matrix(im, im.size))))
+	pixel = pixel_matrix(im, im.size)
+	bright = brightness_matrix(im.size, 'l', pixel)
+	text = text_matrix(im.size, text_repeat_factor, bright)
+	print_text_console(im.size, text)
+	print_text_file(im.size,text)
 
 if __name__ == '__main__':
 	auto_program()
